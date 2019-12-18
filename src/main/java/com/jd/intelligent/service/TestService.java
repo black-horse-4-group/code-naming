@@ -1,7 +1,7 @@
 package com.jd.intelligent.service;
 
 
-import intelligent.common.util.DbUtil;
+import com.jd.intelligent.common.util.DbUtil;
 
 import java.sql.ResultSet;
 
