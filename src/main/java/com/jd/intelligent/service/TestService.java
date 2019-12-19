@@ -13,9 +13,9 @@ public class TestService {
 
     public static void main(String args[]){
         try {
-            ResultSet set = DbUtil.select("select * from passenger_flow");
+            ResultSet set = DbUtil.select("select * from translation");
             while (set.next()) {
-                 System.out.println(set.getString("city_name"));
+                 System.out.println(set.getString("translation_result"));
             }
         }catch(Exception e){
 
