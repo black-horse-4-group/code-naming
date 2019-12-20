@@ -1,5 +1,6 @@
 package com.jd.intelligent.api;
 
+import com.jd.intelligent.analyzer.AnalyzerFactory;
 import com.jd.intelligent.beans.NamingRequest;
 import com.jd.intelligent.beans.Translation;
 import com.jd.intelligent.beans.TranslationResult;
@@ -17,23 +18,7 @@ public class NamingHandler {
     public TranslationResult translate(NamingRequest request){
         TranslationResult result = new TranslationResult();
         result.setSuccess(true);
-        TypeEnum typeEnum = request.getType();
-        if(typeEnum==null){
-            typeEnum = TypeEnum.CLASS;
-        }
-        OptionEnum optionEnum = request.getOption();
-        if(optionEnum==null){
-            optionEnum = OptionEnum.QUERY;
-        }
-       if(optionEnum==OptionEnum.QUERY) {
-           switch (typeEnum) {
-               case CLASS:
-               case INTERFACE:
-                   result.setTranslations(getClassTranslations());
-               case METHOD:
-                   result.setTranslations(getMethodTranslations());
-           }
-       }
+        List<Translation> translations = AnalyzerFactory.createAnalyzer(request).analysis();
         return result;
     }
 
