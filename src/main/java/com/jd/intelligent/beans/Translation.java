@@ -6,6 +6,7 @@ package com.jd.intelligent.beans;
 public class Translation {
     private String word;
     private int likeNum;//点赞数
+    private int from;//来源  0：数据库   1：有道接口
 
     public String getWord() {
         return word;
@@ -17,6 +18,14 @@ public class Translation {
 
     public int getLikeNum() {
         return likeNum;
+    }
+
+    public int getFrom() {
+        return from;
+    }
+
+    public void setFrom(int from) {
+        this.from = from;
     }
 
     public void setLikeNum(int likeNum) {
