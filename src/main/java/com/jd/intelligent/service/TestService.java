@@ -1,6 +1,7 @@
 package com.jd.intelligent.service;
 
 
+import com.alibaba.fastjson.JSON;
 import com.jd.intelligent.api.NamingHandler;
 import com.jd.intelligent.beans.NamingRequest;
 import com.jd.intelligent.beans.Translation;
@@ -24,10 +25,10 @@ public class TestService {
         NamingRequest request = new NamingRequest();
         request.setChineseWord("吃饭");
         request.setOption(OptionEnum.QUERY);
-        request.setType(TypeEnum.CLASS);
+        request.setType(TypeEnum.SUB_CLASS);
         TranslationResult result = namingHandler.translate(request);
         for(Translation translation : result.getTranslations()){
-            System.out.println(translation.getWord());
+            System.out.println(JSON.toJSON(translation));
         }
     }
 }

@@ -6,11 +6,8 @@ import com.jd.intelligent.constant.FromConstant;
 import org.apache.commons.collections4.CollectionUtils;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 /**
  * @author wangshuai
