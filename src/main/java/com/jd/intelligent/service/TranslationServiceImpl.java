@@ -1,12 +1,20 @@
 package com.jd.intelligent.service;
 
+import com.alibaba.fastjson.JSONObject;
 import com.jd.intelligent.beans.NamingRequest;
 import com.jd.intelligent.beans.Translation;
+import com.jd.intelligent.beans.YouDaoResultBean;
 import com.jd.intelligent.common.util.DbUtil;
+import com.jd.intelligent.common.util.HttpUtil;
+import com.jd.intelligent.common.util.PropertyUtil;
+import com.jd.intelligent.enums.FromEnum;
 import com.jd.intelligent.enums.TypeEnum;
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,15 +23,69 @@ import java.util.List;
 public class TranslationServiceImpl implements TranslationService {
     @Override
     public List<Translation> getTranslationResult(String word, TypeEnum typeEnum) {
+        String youDaoResultStr;
+        try{
+            youDaoResultStr = getFromYouDao(word);
+            if(StringUtils.isBlank(youDaoResultStr)){
+                return getFromDb(word, typeEnum);
+            }
+        }catch (Exception e){
+            return getFromDb(word, typeEnum);
+        }
+        YouDaoResultBean resultBean = JSONObject.parseObject(youDaoResultStr, YouDaoResultBean.class);
+        List<Translation> dbResult = getFromDb(word, typeEnum);
 
+        return formatYouDaoWithDb(resultBean, dbResult);
+    }
 
+    private List<Translation> formatYouDaoWithDb(YouDaoResultBean resultBean, List<Translation> dbResult) {
+        List<Translation> translations = new ArrayList<>();
+        if(CollectionUtils.isNotEmpty(resultBean.getTranslation())){
+            resultBean.getTranslation().forEach(e -> {
+                Translation translation = new Translation();
+                translation.setFrom(FromEnum.YOU_DAO.getCode());
+                translation.setWord(e);
+                translation.setLikeNum(0);
 
+                translations.add(translation);
+            });
+        }
+        if(CollectionUtils.isNotEmpty(dbResult)){
+            translations.addAll(dbResult);
+        }
 
+        return translations;
+    }
 
+    private List<Translation> getFromDb(String word, TypeEnum typeEnum) {
+        try {
+            Long sourceId = getResourceId(word);
+            if(sourceId == null || sourceId == 0L){
+                return new ArrayList<>();
+            }
 
+           String createSelectTranslationBySourceSql = DbUtil.createSelectTranslationBySourceSql(sourceId, typeEnum.getType());
+            System.out.println(createSelectTranslationBySourceSql);
+            ResultSet resultSet = DbUtil.select(createSelectTranslationBySourceSql);
 
+            List<Translation> translations = new ArrayList<>();
+            while(resultSet.next()){
+                Translation translation = new Translation();
+                translation.setWord(resultSet.getString("translation_result"));
+                translation.setFrom(FromEnum.DB.getCode());
+                translation.setLikeNum(resultSet.getInt("correct_weight"));
 
-        return null;
+                translations.add(translation);
+            }
+            return translations;
+        } catch (SQLException e) {
+            throw new RuntimeException("DB:根据"+word+"和"+typeEnum+"获取数据异常");
+        }
+    }
+
+    private String getFromYouDao(String word) {
+        String youDaoUrl = PropertyUtil.getPropertyValue("youdao.url").concat(word);
+        return HttpUtil.doGet(youDaoUrl);
     }
 
     @Override
@@ -35,14 +97,14 @@ public class TranslationServiceImpl implements TranslationService {
             if(count < 1) {
                 System.out.println("insert a new line");
                 DbUtil.update(DbUtil.createInsertSourceSql(namingRequest.getChineseWord()));
-                Long sourceId = getResourceId(namingRequest);
+                Long sourceId = getResourceId(namingRequest.getChineseWord());
                 dealTranslation(sourceId, namingRequest);
                 return;
             }
             
             //update an exists line
             System.out.println("update an exists line");
-            Long sourceId = getResourceId(namingRequest);
+            Long sourceId = getResourceId(namingRequest.getChineseWord());
             String increaseSourceHotWeight = DbUtil.createIncreaseHotWeightByIdSql(sourceId);
             System.out.println(increaseSourceHotWeight);
             DbUtil.update(increaseSourceHotWeight);
@@ -50,13 +112,10 @@ public class TranslationServiceImpl implements TranslationService {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-
-
     }
 
-    private Long getResourceId(NamingRequest namingRequest) throws SQLException {
-        ResultSet source = DbUtil.select(DbUtil.createSelectBySourceSql(namingRequest.getChineseWord()));
+    private Long getResourceId(String word) throws SQLException {
+        ResultSet source = DbUtil.select(DbUtil.createSelectBySourceSql(word));
         while(source.next()){
             return Long.valueOf(source.getString("id"));
         }

@@ -31,4 +31,13 @@ public class Translation {
     public void setLikeNum(int likeNum) {
         this.likeNum = likeNum;
     }
+
+    @Override
+    public String toString() {
+        return "Translation{" +
+                "word='" + word + '\'' +
+                ", likeNum=" + likeNum +
+                ", from=" + from +
+                '}';
+    }
 }

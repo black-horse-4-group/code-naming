@@ -8,6 +8,8 @@ import com.jd.intelligent.beans.TranslationResult;
 import com.jd.intelligent.enums.OptionEnum;
 import com.jd.intelligent.enums.TypeEnum;
 
+import java.util.List;
+
 /**
  * Created by sunxuedong1 on 2019/12/13.
  */
@@ -26,17 +28,18 @@ public class TestService {
 
 
 
-        NamingRequest request = new NamingRequest();
-        request.setChineseWord("测试");
-        request.setType(TypeEnum.CLASS);
-        Translation translation = new Translation();
-        translation.setWord("test_2222");
-        request.setPersistentWord(translation);
+//        NamingRequest request = new NamingRequest();
+//        request.setChineseWord("测试");
+//        request.setType(TypeEnum.CLASS);
+//        Translation translation = new Translation();
+//        translation.setWord("test_2222");
+//        request.setPersistentWord(translation);
 
         TranslationService translationService = new TranslationServiceImpl();
-        translationService.persistenceTranslation(request);
+//        translationService.persistenceTranslation(request);
 
-
+        List<Translation> translations = translationService.getTranslationResult("测试", TypeEnum.CLASS);
+        translations.forEach(e -> System.out.println(e));
 
 //        NamingHandler namingHandler = new NamingHandler();
 //        NamingRequest request = new NamingRequest();

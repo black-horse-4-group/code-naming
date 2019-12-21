@@ -114,5 +114,14 @@ public class DbUtil {
         return sb.toString();
     }
 
+    public static String createSelectTranslationBySourceSql(Long sourceId, int type){
+        StringBuffer sb = new StringBuffer("SELECT * FROM translation ");
+        sb.append(" WHERE").append(" source_id = ").append(sourceId)
+                .append(" AND translation_type =").append(type)
+                .append(" ORDER BY correct_weight DESC");
+
+        return sb.toString();
+    }
+
     //增加月份，是否可以大概率猜测哪个行业比较火
 }
