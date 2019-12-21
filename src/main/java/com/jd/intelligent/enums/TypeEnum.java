@@ -24,4 +24,7 @@ public enum TypeEnum {
         this.value = value;
     }
 
+    public int getType() {
+        return type;
+    }
 }

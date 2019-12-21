@@ -4,7 +4,7 @@ import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
 /**
@@ -12,7 +12,7 @@ import org.apache.http.util.EntityUtils;
  */
 public class HttpUtil {
     public static String doGet(String url){
-        HttpClient client = new DefaultHttpClient();
+        HttpClient client = HttpClients.createDefault();
         HttpGet httpGet = new HttpGet(url);           //创建HttpGet
         try {
             HttpResponse response = client.execute(httpGet);
