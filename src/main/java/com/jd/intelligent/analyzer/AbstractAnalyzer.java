@@ -2,6 +2,7 @@ package com.jd.intelligent.analyzer;
 
 import com.jd.intelligent.beans.NamingRequest;
 import com.jd.intelligent.beans.Translation;
+import com.jd.intelligent.constant.Constant;
 import com.jd.intelligent.service.TranslationService;
 import com.jd.intelligent.service.TranslationServiceImpl;
 
@@ -18,7 +19,8 @@ public abstract  class AbstractAnalyzer implements Analyzer{
 
     @Override
     public List<Translation> analysis() {
-        List<Translation>  result = doAnalysise(getTranslations());
+        List<Translation> translations = preProcessing();
+        List<Translation>  result = doAnalysise(translations);
         if(result!=null) {
             result.sort((Translation item1, Translation item2) -> {
                 return item1.getLikeNum() - item2.getLikeNum();
@@ -27,10 +29,20 @@ public abstract  class AbstractAnalyzer implements Analyzer{
         return  result;
     }
 
+    private List<Translation> preProcessing(){
+        List<Translation> result = getTranslations();
+        if(result!=null && result.size()>0){
+            result.stream().forEach((translation)->{
+                translation.setWord(translation.getWord().replaceAll(" ", Constant.SLIP_CHAR));
+            });
+        }
+       return result;
+    }
+
     private List<Translation> getTranslations(){
         TranslationService translationService = new TranslationServiceImpl();
-        translationService.getTranslationResult(request.getChineseWord(),request.getType());
-        return null;
+        System.out.println("#######"+request.getChineseWord()+"###"+request.getType().name());
+        return translationService.getTranslationResult(request.getChineseWord(),request.getType());
     }
 
     abstract List<Translation> doAnalysise(List<Translation> willTranslations);

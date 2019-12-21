@@ -9,6 +9,7 @@ public class YouDaoResultBean {
     private String query;
     private int errorCode;
     private List<String> translation;
+    private List<ConnectedWord> web;
 
     public String getQuery() {
         return query;
@@ -34,12 +35,21 @@ public class YouDaoResultBean {
         this.translation = translation;
     }
 
+    public List<ConnectedWord> getWeb() {
+        return web;
+    }
+
+    public void setWeb(List<ConnectedWord> web) {
+        this.web = web;
+    }
+
     @Override
     public String toString() {
         return "YouDaoResultBean{" +
                 "query='" + query + '\'' +
                 ", errorCode=" + errorCode +
                 ", translation=" + translation +
+                ", web=" + web +
                 '}';
     }
 }

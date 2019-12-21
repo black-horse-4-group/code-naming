@@ -23,42 +23,27 @@ public class NamingHandler {
 
     public TranslationResult translate(NamingRequest request){
         TranslationResult result = new TranslationResult();
-        result.setSuccess(true);
-        List<Translation> translations = null;
-        if(request.getOption()==OptionEnum.QUERY){
-            translations = AnalyzerFactory.createAnalyzer(request).analysis();
-        }else{
-            if(StringUtils.isNotBlank(request.getChineseWord()) && !Util.isContainChinese(request.getChineseWord())){
-                TranslationService translationService = new TranslationServiceImpl();
-                translationService.persistenceTranslation(request);
+        try {
+            result.setSuccess(true);
+            List<Translation> translations = null;
+            if (request.getOption() == OptionEnum.QUERY) {
+                translations = AnalyzerFactory.createAnalyzer(request).analysis();
+            } else {
+                if (StringUtils.isNotBlank(request.getChineseWord()) && !Util.isContainChinese(request.getChineseWord())) {
+                    TranslationService translationService = new TranslationServiceImpl();
+                    translationService.persistenceTranslation(request);
+                }
             }
+            RuleFormatFactory ruleFormatFactory = new RuleFormatFactory(translations, request.getType());
+            List<Translation> afterRuleTranslations = ruleFormatFactory.format();
+            if(afterRuleTranslations!=null && afterRuleTranslations.size()>10){
+                afterRuleTranslations = afterRuleTranslations.subList(0,10);
+            }
+            result.setTranslations(afterRuleTranslations == null ? new ArrayList<Translation>() : afterRuleTranslations);
+        }catch(Exception e){
+            result.setSuccess(false);
+            e.printStackTrace();
         }
-        RuleFormatFactory ruleFormatFactory = new RuleFormatFactory(translations,request.getType());
-        List<Translation> afterRuleTranslations = ruleFormatFactory.format();
-        result.setTranslations(afterRuleTranslations==null?new ArrayList<Translation>():afterRuleTranslations);
-        return result;
-    }
-
-    private List<Translation> getClassTranslations(){
-        List<Translation> result = new ArrayList<Translation>();
-        Translation translation = new Translation();
-        translation.setWord("Student");
-        result.add(translation);
-        Translation translation2 = new Translation();
-        translation2.setWord("Teacher");
-        result.add(translation2);
-        return result;
-    }
-
-
-    private List<Translation> getMethodTranslations(){
-        List<Translation> result = new ArrayList<Translation>();
-        Translation translation = new Translation();
-        translation.setWord("doStudy");
-        result.add(translation);
-        Translation translation2 = new Translation();
-        translation2.setWord("doWork");
-        result.add(translation2);
         return result;
     }
 }

@@ -10,6 +10,8 @@ import com.jd.intelligent.enums.OptionEnum;
 import com.jd.intelligent.enums.TypeEnum;
 
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by sunxuedong1 on 2019/12/13.
@@ -20,13 +22,12 @@ public class TestService {
     public static void main(String args[]){
         NamingHandler namingHandler = new NamingHandler();
         NamingRequest request = new NamingRequest();
-        request.setChineseWord("safdsad");
+        request.setChineseWord("吃饭");
         request.setOption(OptionEnum.QUERY);
         request.setType(TypeEnum.CLASS);
         TranslationResult result = namingHandler.translate(request);
         for(Translation translation : result.getTranslations()){
             System.out.println(translation.getWord());
         }
-
     }
 }
