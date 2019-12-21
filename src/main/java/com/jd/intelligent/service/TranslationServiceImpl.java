@@ -41,20 +41,26 @@ public class TranslationServiceImpl implements TranslationService {
     private List<Translation> formatYouDaoWithDb(YouDaoResultBean resultBean, List<Translation> dbResult) {
         List<Translation> translations = new ArrayList<>();
         if(CollectionUtils.isNotEmpty(resultBean.getTranslation())){
-            resultBean.getTranslation().forEach(e -> {
-                Translation translation = new Translation();
-                translation.setFrom(FromEnum.YOU_DAO.getCode());
-                translation.setWord(e);
-                translation.setLikeNum(0);
-
-                translations.add(translation);
-            });
+            resultBean.getTranslation().forEach(e -> initYouDaoTranslation(translations, e));
+        }
+        if(CollectionUtils.isNotEmpty(resultBean.getWeb())){
+            resultBean.getWeb()
+                    .forEach(e -> e.getValue()
+                            .forEach(value -> initYouDaoTranslation(translations, value)));
         }
         if(CollectionUtils.isNotEmpty(dbResult)){
             translations.addAll(dbResult);
         }
 
         return translations;
+    }
+
+    private void initYouDaoTranslation(List<Translation> translations, String value) {
+        Translation translation = new Translation();
+        translation.setFrom(FromEnum.YOU_DAO.getCode());
+        translation.setWord(value);
+        translation.setLikeNum(0);
+        translations.add(translation);
     }
 
     private List<Translation> getFromDb(String word, TypeEnum typeEnum) {
