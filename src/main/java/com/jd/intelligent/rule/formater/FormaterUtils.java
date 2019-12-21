@@ -2,7 +2,6 @@ package com.jd.intelligent.rule.formater;
 
 import com.jd.intelligent.beans.Translation;
 import com.jd.intelligent.constant.Constant;
-import com.jd.intelligent.constant.FromConstant;
 import com.jd.intelligent.enums.FromEnum;
 import org.apache.commons.collections4.CollectionUtils;
 

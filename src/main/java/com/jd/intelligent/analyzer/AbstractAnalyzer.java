@@ -41,7 +41,6 @@ public abstract  class AbstractAnalyzer implements Analyzer{
 
     private List<Translation> getTranslations(){
         TranslationService translationService = new TranslationServiceImpl();
-        System.out.println("#######"+request.getChineseWord()+"###"+request.getType().name());
         return translationService.getTranslationResult(request.getChineseWord(),request.getType());
     }
 
