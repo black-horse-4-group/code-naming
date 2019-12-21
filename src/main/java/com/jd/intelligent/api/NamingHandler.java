@@ -21,6 +21,7 @@ import java.util.List;
 public class NamingHandler {
 
     public TranslationResult translate(NamingRequest request){
+        System.out.println("传参："+JSON.toJSON(request));
         TranslationResult result = new TranslationResult();
         try {
             result.setSuccess(true);

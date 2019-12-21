@@ -23,12 +23,12 @@ public class TestService {
     public static void main(String args[]){
         NamingHandler namingHandler = new NamingHandler();
         NamingRequest request = new NamingRequest();
-        request.setChineseWord("学生");
-        request.setOption(OptionEnum.QUERY);
-        request.setType(TypeEnum.VARIABLE);
-//        Translation persistentWord = new Translation();
-//        persistentWord.setWord("bbbbbbbbbbbb");
-//        request.setPersistentWord(persistentWord);
+        request.setChineseWord("教室");
+        request.setOption(OptionEnum.UPDATE);
+        request.setType(TypeEnum.CLASS);
+        Translation persistentWord = new Translation();
+        persistentWord.setWord("Room2");
+        request.setPersistentWord(persistentWord);
         TranslationResult result = namingHandler.translate(request);
         System.out.println(JSON.toJSON(result));
 
