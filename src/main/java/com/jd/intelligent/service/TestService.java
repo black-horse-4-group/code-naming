@@ -22,7 +22,7 @@ public class TestService {
         NamingRequest request = new NamingRequest();
         request.setChineseWord("safdsad");
         request.setOption(OptionEnum.QUERY);
-        request.setType(TypeEnum.INTERFACE);
+        request.setType(TypeEnum.CLASS);
         TranslationResult result = namingHandler.translate(request);
         for(Translation translation : result.getTranslations()){
             System.out.println(translation.getWord());

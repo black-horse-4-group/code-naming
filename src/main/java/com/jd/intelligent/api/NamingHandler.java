@@ -4,10 +4,14 @@ import com.jd.intelligent.analyzer.AnalyzerFactory;
 import com.jd.intelligent.beans.NamingRequest;
 import com.jd.intelligent.beans.Translation;
 import com.jd.intelligent.beans.TranslationResult;
+import com.jd.intelligent.common.util.Util;
 import com.jd.intelligent.constant.FromConstant;
 import com.jd.intelligent.enums.OptionEnum;
 import com.jd.intelligent.enums.TypeEnum;
 import com.jd.intelligent.rule.factory.RuleFormatFactory;
+import com.jd.intelligent.service.TranslationService;
+import com.jd.intelligent.service.TranslationServiceImpl;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,22 +24,18 @@ public class NamingHandler {
     public TranslationResult translate(NamingRequest request){
         TranslationResult result = new TranslationResult();
         result.setSuccess(true);
+        List<Translation> translations = null;
         if(request.getOption()==OptionEnum.QUERY){
-            List<Translation> translations = AnalyzerFactory.createAnalyzer(request).analysis();
+            translations = AnalyzerFactory.createAnalyzer(request).analysis();
+        }else{
+            if(StringUtils.isNotBlank(request.getChineseWord()) && !Util.isContainChinese(request.getChineseWord())){
+                TranslationService translationService = new TranslationServiceImpl();
+                translationService.persistenceTranslation(request);
+            }
         }
-
-        List<Translation> translations = new ArrayList<Translation>();
-        Translation translation1 = new Translation();
-        translation1.setWord("teacher");
-        translation1.setLikeNum(2);
-        translation1.setFrom(FromConstant.FROM_DB);
-        translations.add(translation1);
-        Translation translation2 = new Translation();
-        translation2.setWord("student");
-        translation2.setLikeNum(0);
-        translation2.setFrom(FromConstant.FROM_YOUDAO);
-        translations.add(translation2);
-        result.setTranslations(translations);
+        RuleFormatFactory ruleFormatFactory = new RuleFormatFactory(translations,request.getType());
+        List<Translation> afterRuleTranslations = ruleFormatFactory.format();
+        result.setTranslations(afterRuleTranslations==null?new ArrayList<Translation>():afterRuleTranslations);
         return result;
     }
 
