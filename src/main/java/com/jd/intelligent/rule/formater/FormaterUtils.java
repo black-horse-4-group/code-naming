@@ -3,6 +3,7 @@ package com.jd.intelligent.rule.formater;
 import com.jd.intelligent.beans.Translation;
 import com.jd.intelligent.constant.Constant;
 import com.jd.intelligent.constant.FromConstant;
+import com.jd.intelligent.enums.FromEnum;
 import org.apache.commons.collections4.CollectionUtils;
 
 import java.util.Arrays;
@@ -21,7 +22,7 @@ public class FormaterUtils {
             return;
         }
         words.stream().forEach(e->{
-            if(e.getFrom() == FromConstant.FROM_DB){
+            if(e.getFrom() == FromEnum.DB.getCode()){
                 return;
             }
             String[] wordSpliteArr = e.getWord().split(Constant.SLIP_CHAR);
@@ -43,7 +44,7 @@ public class FormaterUtils {
             return;
         }
         words.stream().forEach(e->{
-            if(e.getFrom() == FromConstant.FROM_DB){
+            if(e.getFrom() == FromEnum.DB.getCode()){
                 return;
             }
             String[] wordSpliteArr = e.getWord().split(Constant.SLIP_CHAR);
@@ -63,7 +64,7 @@ public class FormaterUtils {
             return;
         }
         words.stream().forEach(e->{
-            if(e.getFrom() == FromConstant.FROM_DB){
+            if(e.getFrom() == FromEnum.DB.getCode()){
                 return;
             }
             String[] wordSpliteArr = e.getWord().split(Constant.SLIP_CHAR);
@@ -89,7 +90,7 @@ public class FormaterUtils {
             return;
         }
         words.stream().forEach(e->{
-            if(e.getFrom() == FromConstant.FROM_DB){
+            if(e.getFrom() == FromEnum.DB.getCode()){
                 return;
             }
             String[] wordSpliteArr = e.getWord().split(Constant.SLIP_CHAR);
