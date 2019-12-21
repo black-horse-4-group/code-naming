@@ -1,5 +1,7 @@
 package com.jd.intelligent.rule.ruleformat;
 
+import com.jd.intelligent.beans.Translation;
+
 import java.util.List;
 
 /**
@@ -9,5 +11,5 @@ import java.util.List;
  */
 public interface IRuleFormater {
 
-    String format(List<String> words);
+    List<Translation> format(List<Translation> words);
 }

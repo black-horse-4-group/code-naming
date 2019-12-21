@@ -9,9 +9,9 @@ import com.jd.intelligent.enums.TypeEnum;
 public class NamingRequest {
     private String chineseWord;
 
-    private TypeEnum type;
+    private TypeEnum type = TypeEnum.CLASS;
 
-    private OptionEnum option;
+    private OptionEnum option = OptionEnum.QUERY;
 
     private Translation persistentWord;
 

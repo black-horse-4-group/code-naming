@@ -1,5 +1,6 @@
 package com.jd.intelligent.rule.factory;
 
+import com.jd.intelligent.beans.Translation;
 import com.jd.intelligent.enums.TypeEnum;
 import com.jd.intelligent.rule.ruleformat.*;
 
@@ -12,12 +13,10 @@ import java.util.List;
  */
 public class RuleFormatFactory {
 
-    private String context;
-    private List<String> words;
+    private List<Translation> words;
     private TypeEnum type;
 
-    public RuleFormatFactory(String context,List<String> words,TypeEnum type){
-        this.context = context;
+    public RuleFormatFactory(List<Translation> words,TypeEnum type){
         this.words = words;
         this.type = type;
     }
@@ -41,19 +40,14 @@ public class RuleFormatFactory {
             case VARIABLE:
                 return new VariableRuleFormater();
             default:
-                return getFormaterByContext();
+                return new VariableRuleFormater();
         }
     }
 
-    private IRuleFormater getFormaterByContext(){
-        if(context.contains("static") && context.contains("final")){
-            return new ConstantRuleFormater();
-        }
-        return new VariableRuleFormater();
-    }
 
 
-    public String format(){
+    public List<Translation> format(){
+
         return getFormater().format(words);
     }
 }
