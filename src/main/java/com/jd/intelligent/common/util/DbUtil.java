@@ -47,21 +47,21 @@ public class DbUtil {
 
     public static String createSelectBySourceSql(String chinese){
         StringBuffer sb = new StringBuffer("SELECT * FROM source ");
-        sb.append(" WHERE ").append("source_chinese = '").append(chinese).append("';");
+        sb.append(" WHERE").append(" binary source_chinese = '").append(chinese).append("';");
 
         return sb.toString();
     }
 
     public static String createCountBySourceSql(String chinese){
         StringBuffer sb = new StringBuffer("SELECT COUNT(1) count FROM source ");
-        sb.append(" WHERE ").append("source_chinese = '").append(chinese).append("';");
+        sb.append(" WHERE").append(" binary source_chinese = '").append(chinese).append("';");
 
         return sb.toString();
     }
 
     public static String createSelectLikeSourceSql(String chinese){
         StringBuffer sb = new StringBuffer("SELECT * FROM source ");
-        sb.append(" WHERE ").append("source_chinese LIKE '%").append(chinese).append("%';");
+        sb.append(" WHERE").append(" source_chinese LIKE '%").append(chinese).append("%';");
 
         return sb.toString();
     }
@@ -83,7 +83,7 @@ public class DbUtil {
         StringBuffer sb = new StringBuffer("SELECT COUNT(1) count FROM translation ");
         sb.append(" WHERE source_id = ").append(sourceId)
                 .append(" AND translation_type = ").append(type)
-                .append(" AND translation_result = ").append("'").append(translationResult).append("';");
+                .append(" AND binary translation_result = ").append("'").append(translationResult).append("';");
 
         return sb.toString();
     }
@@ -109,7 +109,7 @@ public class DbUtil {
         StringBuffer sb = new StringBuffer("UPDATE translation SET correct_weight = correct_weight+1");
         sb.append(" WHERE source_id = ").append(sourceId)
                 .append(" AND translation_type = ").append(type)
-                .append(" AND translation_result = ").append("'").append(translationResult).append("';");
+                .append(" AND binary translation_result = ").append("'").append(translationResult).append("';");
 
         return sb.toString();
     }
