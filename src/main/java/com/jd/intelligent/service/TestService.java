@@ -24,14 +24,13 @@ public class TestService {
         NamingHandler namingHandler = new NamingHandler();
         NamingRequest request = new NamingRequest();
         request.setChineseWord("学生");
-        request.setOption(OptionEnum.UPDATE);
+        request.setOption(OptionEnum.QUERY);
         request.setType(TypeEnum.VARIABLE);
-        Translation persistentWord = new Translation();
-        persistentWord.setWord("student");
-        request.setPersistentWord(persistentWord);
+//        Translation persistentWord = new Translation();
+//        persistentWord.setWord("student");
+//        request.setPersistentWord(persistentWord);
         TranslationResult result = namingHandler.translate(request);
-
-            System.out.println(JSON.toJSON(result));
+        System.out.println(JSON.toJSON(result));
 
     }
 }

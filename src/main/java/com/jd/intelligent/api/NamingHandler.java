@@ -1,5 +1,6 @@
 package com.jd.intelligent.api;
 
+import com.alibaba.fastjson.JSON;
 import com.jd.intelligent.analyzer.AnalyzerFactory;
 import com.jd.intelligent.beans.NamingRequest;
 import com.jd.intelligent.beans.Translation;
@@ -30,8 +31,8 @@ public class NamingHandler {
                 List<Translation> afterRuleTranslations = ruleFormatFactory.format();
                 if(afterRuleTranslations!=null && afterRuleTranslations.size()>10){
                     afterRuleTranslations = afterRuleTranslations.subList(0,10);
-                    result.setTranslations(afterRuleTranslations == null ? new ArrayList<Translation>() : afterRuleTranslations);
                 }
+                result.setTranslations(afterRuleTranslations == null ? new ArrayList<Translation>() : afterRuleTranslations);
             } else {
                 if (StringUtils.isNotBlank(request.getChineseWord()) && request.getPersistentWord()!= null && StringUtils.isNotBlank(request.getPersistentWord().getWord()) && !Util.isContainChinese(request.getPersistentWord().getWord())) {
                     TranslationService translationService = new TranslationServiceImpl();
