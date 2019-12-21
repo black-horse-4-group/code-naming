@@ -19,6 +19,9 @@ public class NamingHandler {
     public TranslationResult translate(NamingRequest request){
         TranslationResult result = new TranslationResult();
         result.setSuccess(true);
+        if(request.getOption()==OptionEnum.QUERY){
+
+        }
         List<Translation> translations = AnalyzerFactory.createAnalyzer(request).analysis();
         Translation translation1 = new Translation();
         translation1.setWord("teacher");

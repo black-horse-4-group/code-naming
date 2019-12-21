@@ -2,6 +2,7 @@ package com.jd.intelligent.analyzer;
 
 import com.jd.intelligent.beans.NamingRequest;
 import com.jd.intelligent.beans.Translation;
+import com.jd.intelligent.constant.Constant;
 import com.jd.intelligent.constant.FromConstant;
 
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ public class MethodAnalyzer extends AbstractAnalyzer{
         if(willTranslations!=null && willTranslations.size()>0){
             willTranslations.stream().forEach((item)->{
                 if(item.getFrom()== FromConstant.FROM_DB){
-                      item.setWord("do_"+item.getWord());
+                      item.setWord("do"+Constant.SLIP_CHAR+item.getWord());
                 }
             });
         }
