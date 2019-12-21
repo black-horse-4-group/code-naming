@@ -27,7 +27,7 @@ public class TestService {
         request.setOption(OptionEnum.QUERY);
         request.setType(TypeEnum.VARIABLE);
 //        Translation persistentWord = new Translation();
-//        persistentWord.setWord("student");
+//        persistentWord.setWord("bbbbbbbbbbbb");
 //        request.setPersistentWord(persistentWord);
         TranslationResult result = namingHandler.translate(request);
         System.out.println(JSON.toJSON(result));

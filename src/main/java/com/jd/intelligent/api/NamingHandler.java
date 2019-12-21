@@ -34,7 +34,7 @@ public class NamingHandler {
                 }
                 result.setTranslations(afterRuleTranslations == null ? new ArrayList<Translation>() : afterRuleTranslations);
             } else {
-                if (StringUtils.isNotBlank(request.getChineseWord()) && request.getPersistentWord()!= null && StringUtils.isNotBlank(request.getPersistentWord().getWord()) && !Util.isContainChinese(request.getPersistentWord().getWord())) {
+                if (StringUtils.isNotBlank(request.getChineseWord()) && Util.isContainChinese(request.getChineseWord())  && request.getPersistentWord()!= null && StringUtils.isNotBlank(request.getPersistentWord().getWord()) && !Util.isContainChinese(request.getPersistentWord().getWord())) {
                     TranslationService translationService = new TranslationServiceImpl();
                     translationService.persistenceTranslation(request);
                 }

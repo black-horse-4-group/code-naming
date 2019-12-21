@@ -1,5 +1,6 @@
 package com.jd.intelligent.analyzer;
 
+import com.alibaba.fastjson.JSON;
 import com.jd.intelligent.beans.NamingRequest;
 import com.jd.intelligent.beans.Translation;
 import com.jd.intelligent.constant.Constant;
