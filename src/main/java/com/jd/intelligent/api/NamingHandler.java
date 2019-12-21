@@ -20,9 +20,10 @@ public class NamingHandler {
         TranslationResult result = new TranslationResult();
         result.setSuccess(true);
         if(request.getOption()==OptionEnum.QUERY){
-
+            List<Translation> translations = AnalyzerFactory.createAnalyzer(request).analysis();
         }
-        List<Translation> translations = AnalyzerFactory.createAnalyzer(request).analysis();
+
+        List<Translation> translations = new ArrayList<Translation>();
         Translation translation1 = new Translation();
         translation1.setWord("teacher");
         translation1.setLikeNum(2);

@@ -2,6 +2,8 @@ package com.jd.intelligent.analyzer;
 
 import com.jd.intelligent.beans.NamingRequest;
 import com.jd.intelligent.beans.Translation;
+import com.jd.intelligent.service.TranslationService;
+import com.jd.intelligent.service.TranslationServiceImpl;
 
 import java.util.List;
 
@@ -24,6 +26,8 @@ public abstract  class AbstractAnalyzer implements Analyzer{
     }
 
     private List<Translation> getTranslations(){
+        TranslationService translationService = new TranslationServiceImpl();
+        translationService.getTranslationResult(request.getChineseWord(),request.getType());
         return null;
     }
 
