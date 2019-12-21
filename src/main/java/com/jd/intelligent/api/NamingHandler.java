@@ -4,6 +4,7 @@ import com.jd.intelligent.analyzer.AnalyzerFactory;
 import com.jd.intelligent.beans.NamingRequest;
 import com.jd.intelligent.beans.Translation;
 import com.jd.intelligent.beans.TranslationResult;
+import com.jd.intelligent.constant.FromConstant;
 import com.jd.intelligent.enums.OptionEnum;
 import com.jd.intelligent.enums.TypeEnum;
 
@@ -19,6 +20,17 @@ public class NamingHandler {
         TranslationResult result = new TranslationResult();
         result.setSuccess(true);
         List<Translation> translations = AnalyzerFactory.createAnalyzer(request).analysis();
+        Translation translation1 = new Translation();
+        translation1.setWord("teacher");
+        translation1.setLikeNum(2);
+        translation1.setFrom(FromConstant.FROM_DB);
+        translations.add(translation1);
+        Translation translation2 = new Translation();
+        translation2.setWord("student");
+        translation2.setLikeNum(0);
+        translation2.setFrom(FromConstant.FROM_YOUDAO);
+        translations.add(translation2);
+        result.setTranslations(translations);
         return result;
     }
 
