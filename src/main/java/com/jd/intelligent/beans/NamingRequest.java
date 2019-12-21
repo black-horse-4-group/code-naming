@@ -13,6 +13,8 @@ public class NamingRequest {
 
     private OptionEnum option;
 
+    private Translation persistentWord;
+
     public String getChineseWord() {
         return chineseWord;
     }
@@ -35,5 +37,13 @@ public class NamingRequest {
 
     public void setOption(OptionEnum option) {
         this.option = option;
+    }
+
+    public Translation getPersistentWord() {
+        return persistentWord;
+    }
+
+    public void setPersistentWord(Translation persistentWord) {
+        this.persistentWord = persistentWord;
     }
 }
