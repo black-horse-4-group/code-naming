@@ -71,7 +71,7 @@ public class FormaterUtils {
             for(int i=0;i<wordSpliteArr.length;i++){
                 String value = wordSpliteArr[i];
                 if(i == 0){
-                    sb.append(value);
+                    sb.append(value.toLowerCase());
                 }else{
                     String first = value.substring(0,1).toUpperCase();
                     String others = value.substring(1);

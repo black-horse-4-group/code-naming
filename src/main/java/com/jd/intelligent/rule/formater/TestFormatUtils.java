@@ -42,25 +42,25 @@ public class TestFormatUtils {
         word12.setFrom(0);
 
         Translation word22 = new Translation();
-        word22.setWord("drink_milk");
-        word22.setFrom(1);
+        word22.setWord("Student");
+        word22.setFrom(2);
         Translation word32 = new Translation();
         word32.setWord("drink_milk");
-        word32.setFrom(1);
+        word32.setFrom(2);
 
         words2.add(word12);
         words2.add(word22);
         words2.add(word32);
 
 
-        List<Translation> classList = new RuleFormatFactory(words, TypeEnum.CLASS).format();
-        List<Translation> constantList = new RuleFormatFactory(words2, TypeEnum.CONSTANT).format();
+//        List<Translation> classList = new RuleFormatFactory(words, TypeEnum.CLASS).format();
+//        List<Translation> constantList = new RuleFormatFactory(words2, TypeEnum.CONSTANT).format();
 //        List<Translation> enumList = new RuleFormatFactory(words, TypeEnum.ENUM).format();
 //        List<Translation> interfaceList = new RuleFormatFactory(words2, TypeEnum.INTERFACE).format();
 //        List<Translation> methodList = new RuleFormatFactory(words, TypeEnum.METHOD).format();
 //        List<Translation> packageList = new RuleFormatFactory(words2, TypeEnum.PACKAGE).format();
 //        List<Translation> subClassList = new RuleFormatFactory(words, TypeEnum.SUB_CLASS).format();
-//        List<Translation> variableList = new RuleFormatFactory(words2, TypeEnum.VARIABLE).format();
+        List<Translation> variableList = new RuleFormatFactory(words2, TypeEnum.VARIABLE).format();
 
         System.out.println(words);
     }

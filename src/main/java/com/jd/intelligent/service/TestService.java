@@ -23,12 +23,14 @@ public class TestService {
     public static void main(String args[]){
         NamingHandler namingHandler = new NamingHandler();
         NamingRequest request = new NamingRequest();
-        request.setChineseWord("吃饭");
+        request.setChineseWord("学生");
         request.setOption(OptionEnum.QUERY);
-        request.setType(TypeEnum.ENUM);
+        request.setType(TypeEnum.VARIABLE);
+//        Translation persistentWord = new Translation();
+//        persistentWord.setWord("student");
+//        request.setPersistentWord(persistentWord);
         TranslationResult result = namingHandler.translate(request);
-        for(Translation translation : result.getTranslations()){
-            System.out.println(JSON.toJSON(translation));
-        }
+        System.out.println(JSON.toJSON(result));
+
     }
 }
