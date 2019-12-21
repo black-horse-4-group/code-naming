@@ -60,6 +60,9 @@ public class RuleFormatFactory {
                 .forEach(e->{
                     List<Translation> resultList = resultMap.get(e);
                     if(CollectionUtils.isNotEmpty(resultList)){
+                        resultList.sort((Translation item1, Translation item2) -> {
+                            return  item2.getLikeNum() - item1.getLikeNum();
+                        });
                         result.add(resultList.get(0));
                     }
                 });

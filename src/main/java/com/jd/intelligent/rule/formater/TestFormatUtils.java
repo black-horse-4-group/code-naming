@@ -39,15 +39,16 @@ public class TestFormatUtils {
         List<Translation> words2 = new ArrayList<>();
         Translation word12 = new Translation();
         word12.setWord("eat_food");
-        word12.setFrom(0);
-
+        word12.setFrom(2);
+        word12.setLikeNum(2);
         Translation word22 = new Translation();
-        word22.setWord("Student");
+        word22.setWord("eat_food");
         word22.setFrom(2);
+        word22.setLikeNum(4);
         Translation word32 = new Translation();
         word32.setWord("drink_milk");
         word32.setFrom(2);
-
+        word32.setLikeNum(3);
         words2.add(word12);
         words2.add(word22);
         words2.add(word32);
