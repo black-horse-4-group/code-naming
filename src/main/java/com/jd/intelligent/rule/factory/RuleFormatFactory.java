@@ -72,6 +72,11 @@ public class RuleFormatFactory {
         }
         getFormater().format(words);
         distinct();
+        if(words!=null) {
+            words.sort((Translation item1, Translation item2) -> {
+                return  item2.getLikeNum() - item1.getLikeNum();
+            });
+        }
         return words;
     }
 }

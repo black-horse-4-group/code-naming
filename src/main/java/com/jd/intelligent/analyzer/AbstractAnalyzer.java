@@ -21,11 +21,6 @@ public abstract  class AbstractAnalyzer implements Analyzer{
     public List<Translation> analysis() {
         List<Translation> translations = preProcessing();
         List<Translation>  result = doAnalysise(translations);
-        if(result!=null) {
-            result.sort((Translation item1, Translation item2) -> {
-                return item1.getLikeNum() - item2.getLikeNum();
-            });
-        }
         return  result;
     }
 

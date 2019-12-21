@@ -37,7 +37,7 @@ public class NamingHandler {
             if(afterRuleTranslations!=null && afterRuleTranslations.size()>10){
                 afterRuleTranslations = afterRuleTranslations.subList(0,10);
             }
-            result.setTranslations(afterRuleTranslations == null ? new ArrayList<Translation>() : afterRuleTranslations);
+           result.setTranslations(afterRuleTranslations == null ? new ArrayList<Translation>() : afterRuleTranslations);
         }catch(Exception e){
             result.setSuccess(false);
             System.err.println(e);
