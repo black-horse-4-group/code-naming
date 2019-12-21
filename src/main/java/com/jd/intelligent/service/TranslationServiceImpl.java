@@ -41,12 +41,12 @@ public class TranslationServiceImpl implements TranslationService {
     private List<Translation> formatYouDaoWithDb(YouDaoResultBean resultBean, List<Translation> dbResult) {
         List<Translation> translations = new ArrayList<>();
         if(CollectionUtils.isNotEmpty(resultBean.getTranslation())){
-            resultBean.getTranslation().forEach(e -> initYouDaoTranslation(translations, e));
+            resultBean.getTranslation().forEach(e -> initYouDaoTranslation(translations, e, 1));
         }
         if(CollectionUtils.isNotEmpty(resultBean.getWeb())){
             resultBean.getWeb()
                     .forEach(e -> e.getValue()
-                            .forEach(value -> initYouDaoTranslation(translations, value)));
+                            .forEach(value -> initYouDaoTranslation(translations, value, 0)));
         }
         if(CollectionUtils.isNotEmpty(dbResult)){
             translations.addAll(dbResult);
@@ -55,11 +55,11 @@ public class TranslationServiceImpl implements TranslationService {
         return translations;
     }
 
-    private void initYouDaoTranslation(List<Translation> translations, String value) {
+    private void initYouDaoTranslation(List<Translation> translations, String value, int weight) {
         Translation translation = new Translation();
         translation.setFrom(FromEnum.YOU_DAO.getCode());
         translation.setWord(value);
-        translation.setLikeNum(0);
+        translation.setLikeNum(weight);
         translations.add(translation);
     }
 
