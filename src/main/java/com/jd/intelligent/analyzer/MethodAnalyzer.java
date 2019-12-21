@@ -19,7 +19,7 @@ public class MethodAnalyzer extends AbstractAnalyzer{
     List<Translation> doAnalysise(List<Translation> willTranslations) {
         if(willTranslations!=null && willTranslations.size()>0){
             willTranslations.stream().forEach((item)->{
-                if(item.getFrom()== FromConstant.FROM_DB){
+                if(item.getFrom()==  FromConstant.FROM_YOUDAO){
                       item.setWord("do"+Constant.SLIP_CHAR+item.getWord());
                 }
             });

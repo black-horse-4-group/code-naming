@@ -18,7 +18,7 @@ public class EnumAnalyzer extends AbstractAnalyzer{
     List<Translation> doAnalysise(List<Translation> willTranslations) {
         if(willTranslations!=null && willTranslations.size()>0){
             willTranslations.stream().forEach((item)->{
-                if(item.getFrom()== FromConstant.FROM_DB){
+                if(item.getFrom()==  FromConstant.FROM_YOUDAO){
                     item.setWord(item.getWord()+ Constant.SLIP_CHAR+"Enum");
                 }
             });
