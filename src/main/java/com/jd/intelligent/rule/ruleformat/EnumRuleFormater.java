@@ -1,6 +1,7 @@
 package com.jd.intelligent.rule.ruleformat;
 
 import com.jd.intelligent.beans.Translation;
+import com.jd.intelligent.rule.formater.FormaterUtils;
 
 import java.util.List;
 
@@ -11,7 +12,7 @@ import java.util.List;
  */
 public class EnumRuleFormater implements IRuleFormater{
     @Override
-    public List<Translation> format(List<Translation> words) {
-        return null;
+    public void format(List<Translation> words) {
+        FormaterUtils.formatClass(words);
     }
 }

@@ -11,5 +11,5 @@ import java.util.List;
  */
 public interface IRuleFormater {
 
-    List<Translation> format(List<Translation> words);
+    void format(List<Translation> words);
 }

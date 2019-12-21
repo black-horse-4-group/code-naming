@@ -3,8 +3,13 @@ package com.jd.intelligent.rule.factory;
 import com.jd.intelligent.beans.Translation;
 import com.jd.intelligent.enums.TypeEnum;
 import com.jd.intelligent.rule.ruleformat.*;
+import org.apache.commons.collections4.CollectionUtils;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @author wangshuai
@@ -44,10 +49,29 @@ public class RuleFormatFactory {
         }
     }
 
-
+    private void distinct(){
+        List<Translation> result = new ArrayList<>();
+        if(CollectionUtils.isEmpty(words)){
+            return;
+        }
+        Map<String,List<Translation>> resultMap =words.stream()
+             .collect(Collectors.groupingBy(Translation::getWord));
+        resultMap.keySet().stream()
+                .forEach(e->{
+                    List<Translation> resultList = resultMap.get(e);
+                    if(CollectionUtils.isNotEmpty(resultList)){
+                        result.add(resultList.get(0));
+                    }
+                });
+        words = result;
+    }
 
     public List<Translation> format(){
-
-        return getFormater().format(words);
+        if(CollectionUtils.isEmpty(words)){
+            return Collections.EMPTY_LIST;
+        }
+        getFormater().format(words);
+        distinct();
+        return words;
     }
 }

@@ -12,8 +12,8 @@ import java.util.List;
  */
 public class ClassRuleFormater implements IRuleFormater{
     @Override
-    public List<Translation> format(List<Translation> words) {
+    public void format(List<Translation> words) {
 
-        return FormaterUtils.formatClass(words);
+        FormaterUtils.formatClass(words);
     }
 }
