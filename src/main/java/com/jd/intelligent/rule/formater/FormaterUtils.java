@@ -1,5 +1,6 @@
 package com.jd.intelligent.rule.formater;
 
+import com.jd.intelligent.beans.Translation;
 import com.jd.intelligent.constant.Constant;
 import org.apache.commons.collections4.CollectionUtils;
 
@@ -15,12 +16,12 @@ import java.util.stream.Collectors;
  */
 public class FormaterUtils {
 
-    public static List<String> formatClass(List<String> words){
+    public static List<Translation> formatClass(List<Translation> words){
         if(CollectionUtils.isEmpty(words)){
             return Collections.EMPTY_LIST;
         }
         return words.stream().map(e->{
-            String[] wordSpliteArr = e.split(Constant.SLIP_CHAR);
+            String[] wordSpliteArr = e.getWord().split(Constant.SLIP_CHAR);
             StringBuilder sb = new StringBuilder();
             Arrays.asList(wordSpliteArr).stream().forEach(f->{
                 String first = f.substring(0,1).toUpperCase();
@@ -28,7 +29,8 @@ public class FormaterUtils {
                 sb.append(first);
                 sb.append(others);
             });
-            return sb.toString();
+            e.setWord( sb.toString());
+            return e;
         }).collect(Collectors.toList());
     }
 }

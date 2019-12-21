@@ -1,5 +1,8 @@
 package com.jd.intelligent.rule.formater;
 
+import com.jd.intelligent.beans.Translation;
+import jdk.nashorn.internal.parser.JSONParser;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,9 +18,15 @@ public class TestFormatUtils {
     }
 
     public static void testClassFormatUtils(){
-        List<String> words = new ArrayList<>();
-        words.add("eat_food");
-        words.add("drink_milk");
+        List<Translation> words = new ArrayList<>();
+        Translation word1 = new Translation();
+        word1.setWord("eat_food");
+
+        Translation word2 = new Translation();
+        word2.setWord("drink_milk");
+
+        words.add(word1);
+        words.add(word2);
 
         System.out.println(FormaterUtils.formatClass(words));
     }
