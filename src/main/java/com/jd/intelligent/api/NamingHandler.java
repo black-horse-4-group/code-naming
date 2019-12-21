@@ -7,6 +7,7 @@ import com.jd.intelligent.beans.TranslationResult;
 import com.jd.intelligent.constant.FromConstant;
 import com.jd.intelligent.enums.OptionEnum;
 import com.jd.intelligent.enums.TypeEnum;
+import com.jd.intelligent.rule.factory.RuleFormatFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,9 +21,10 @@ public class NamingHandler {
         TranslationResult result = new TranslationResult();
         result.setSuccess(true);
         if(request.getOption()==OptionEnum.QUERY){
-
+            List<Translation> translations = AnalyzerFactory.createAnalyzer(request).analysis();
         }
-        List<Translation> translations = AnalyzerFactory.createAnalyzer(request).analysis();
+
+        List<Translation> translations = new ArrayList<Translation>();
         Translation translation1 = new Translation();
         translation1.setWord("teacher");
         translation1.setLikeNum(2);

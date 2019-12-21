@@ -5,6 +5,6 @@ package com.jd.intelligent.constant;
  */
 public class FromConstant {
     public static final int FROM_DB = 0;
-    public static final int FROM_YOUDAO = 0;
+    public static final int FROM_YOUDAO = 1;
 
 }
