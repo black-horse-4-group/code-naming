@@ -40,7 +40,7 @@ public class NamingHandler {
             result.setTranslations(afterRuleTranslations == null ? new ArrayList<Translation>() : afterRuleTranslations);
         }catch(Exception e){
             result.setSuccess(false);
-            e.printStackTrace();
+            System.err.println(e);
         }
         return result;
     }

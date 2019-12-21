@@ -25,7 +25,7 @@ public class TestService {
         NamingRequest request = new NamingRequest();
         request.setChineseWord("吃饭");
         request.setOption(OptionEnum.QUERY);
-        request.setType(TypeEnum.ENUM);
+        request.setType(TypeEnum.CLASS);
         TranslationResult result = namingHandler.translate(request);
         for(Translation translation : result.getTranslations()){
             System.out.println(JSON.toJSON(translation));

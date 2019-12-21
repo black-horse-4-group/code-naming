@@ -30,6 +30,7 @@ public class TranslationServiceImpl implements TranslationService {
                 return getFromDb(word, typeEnum);
             }
         }catch (Exception e){
+            System.err.println(e);
             return getFromDb(word, typeEnum);
         }
         YouDaoResultBean resultBean = JSONObject.parseObject(youDaoResultStr, YouDaoResultBean.class);
