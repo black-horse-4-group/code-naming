@@ -1,6 +1,8 @@
 package com.jd.intelligent.service;
 
+import com.jd.intelligent.beans.NamingRequest;
 import com.jd.intelligent.beans.Translation;
+import com.jd.intelligent.enums.TypeEnum;
 
 import java.util.List;
 
@@ -9,12 +11,12 @@ import java.util.List;
  */
 public class TranslationServiceImpl implements TranslationService {
     @Override
-    public List<Translation> getTranslationResult(String word) {
+    public List<Translation> getTranslationResult(String word, TypeEnum typeEnum) {
         return null;
     }
 
     @Override
-    public void persistenceTranslation(String word, String translationResult) {
+    public void persistenceTranslation(NamingRequest namingRequest) {
 
     }
 }

@@ -1,6 +1,8 @@
 package com.jd.intelligent.service;
 
+import com.jd.intelligent.beans.NamingRequest;
 import com.jd.intelligent.beans.Translation;
+import com.jd.intelligent.enums.TypeEnum;
 
 import java.util.List;
 
@@ -14,12 +16,11 @@ public interface TranslationService {
      * @param word 输入的数据
      * @return 翻译结果
      */
-    List<Translation> getTranslationResult(String word);
+    List<Translation> getTranslationResult(String word, TypeEnum typeEnum);
 
     /**
      * 持久化resource & translation,增加热度和准确度
-     * @param word 输入的数据
-     * @param translationResult 翻译结果
+     * @param namingRequest 入参数据
      */
-    void persistenceTranslation(String word, String translationResult);
+    void persistenceTranslation(NamingRequest namingRequest);
 }
