@@ -9,5 +9,5 @@ import java.util.List;
  */
 public interface IRuleFormater {
 
-    String format(List<String> words);
+    List<String> format(List<String> words);
 }

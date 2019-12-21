@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class VariableRuleFormater implements IRuleFormater{
     @Override
-    public String format(List<String> words) {
+    public List<String> format(List<String> words) {
         return null;
     }
 }

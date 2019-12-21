@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class ConstantRuleFormater implements IRuleFormater{
     @Override
-    public String format(List<String> words) {
+    public List<String> format(List<String> words) {
         return null;
     }
 }

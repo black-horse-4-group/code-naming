@@ -10,7 +10,7 @@ import java.util.List;
 public class InterfaceRuleFormater implements IRuleFormater{
 
     @Override
-    public String format(List<String> words) {
+    public List<String> format(List<String> words) {
         return null;
     }
 }

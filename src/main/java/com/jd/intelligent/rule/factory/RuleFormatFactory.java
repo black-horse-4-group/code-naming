@@ -53,7 +53,7 @@ public class RuleFormatFactory {
     }
 
 
-    public String format(){
+    public List<String> format(){
         return getFormater().format(words);
     }
 }
