@@ -123,5 +123,11 @@ public class DbUtil {
         return sb.toString();
     }
 
-    //增加月份，是否可以大概率猜测哪个行业比较火
+    public static String createTop100Source(){
+        return "SELECT * FROM source ORDER BY hot_weight DESC LIMIT 100;";
+    }
+
+    public static String createMostTranslationBySourceId(Long sourceId){
+        return "SELECT * FROM translation WHERE source_id ="+sourceId+" ORDER BY correct_weight DESC LIMIT 1";
+    }
 }
