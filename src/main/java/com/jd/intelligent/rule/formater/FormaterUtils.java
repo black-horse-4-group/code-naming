@@ -30,7 +30,7 @@ public class FormaterUtils {
                     .filter(Objects::nonNull)
                     .forEach(f->{
                         String first = f.substring(0,1).toUpperCase();
-                        String others = f.substring(1);
+                        String others = f.substring(1).toLowerCase();
                         sb.append(first);
                         sb.append(others);
                     });
@@ -74,7 +74,7 @@ public class FormaterUtils {
                     sb.append(value.toLowerCase());
                 }else{
                     String first = value.substring(0,1).toUpperCase();
-                    String others = value.substring(1);
+                    String others = value.substring(1).toLowerCase();
 
                     sb.append(first);
                     sb.append(others);
